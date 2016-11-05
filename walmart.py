@@ -17,7 +17,7 @@ trainD=trainD.join(sepTags)
 
 
 
-
+#Making Meaningful Features
 #trainD.join(testing)
 #trainD.join()
 
