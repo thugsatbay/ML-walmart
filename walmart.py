@@ -22,7 +22,8 @@ trainD = trainD.reset_index(drop=True)
 
 #List Of Features
 printAllColumnNames(trainD)
-#printFeaturesInfo(trainD,['Actors'])
+#printFeaturesInfo(trainD,['Actual Color'])
+
 '''
 for x in trainD.columns.values:
 	if x not in ['Actors','item_id','Product Long Description', 'Product Name', 'Product Short Description','Short Description', 'Synopsis']:
@@ -67,3 +68,18 @@ allActors.reset_index(level=1,drop=True,inplace=True)
 allActors.reset_index(drop=True,inplace=True)
 #925 Actors where they appear 1432 times
 '''
+
+
+#Actual Color
+ActualColorCol=trainD['Actual Color'].value_counts()
+thresholdActualColor=0
+for x in ActualColorCol:
+	thresholdActualColor+=1
+	if x<10:
+		break
+ActualColorCol=list(ActualColorCol[:thresholdActualColor-1].index)
+trainD.loc[trainD['Actual Color'].isnull(),'Actual Color']="No Color Specified"
+trainD.loc[~trainD['Actual Color'].isin(ActualColorCol),'Actual Color']="Less Prominent Color"
+trainD=pd.get_dummies(trainD,prefix=['ActualColor'],columns=['Actual Color'])
+#print trainD
+#printAllColumnNames(trainD)
