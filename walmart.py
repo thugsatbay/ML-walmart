@@ -22,7 +22,7 @@ trainD = trainD.reset_index(drop=True)
 
 #List Of Features
 printAllColumnNames(trainD)
-#printFeaturesInfo(trainD,['Actual Color'])
+printFeaturesInfo(trainD,['Artist ID'])
 
 '''
 for x in trainD.columns.values:
